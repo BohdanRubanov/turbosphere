@@ -1,0 +1,70 @@
+
+.block {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 3px;
+	padding-top: 10px;
+	width: 200px;
+	height: 255px;
+	background-color: #ffd9b3;
+	border-radius: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.image {
+	width: 140px;
+	height: 140px;
+	border-radius: 16px;
+}
+.title {
+	font-size: 24px;
+}
+
+.price {
+	font-size: 20px;
+	color: #98503d;
+}
+
+.counter {
+	display: flex;
+	gap: 10px;
+}
+.counter p {
+	font-size: 18px;
+}
+
+.buttonIcon {
+	width: 24px;
+	height: 24px;
+	border: 2px solid black;
+
+	background: none;
+
+	font-size: 20px;
+
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.buttonMore {
+	position: absolute;
+	top: 100%;
+	transform: translateY(-50%);
+	width: 100px;
+	height: 30px;
+	background-color: #faf0e6;
+	border: none;
+	border-radius: 16px;
+	cursor: pointer;
+}
+
+.buttonMore:hover {
+	background-color: #ffbf80;
+}
+
+.buttonMore:active {
+	background-color: #fff;
+	border: 1px solid #ffbf80;
+}
