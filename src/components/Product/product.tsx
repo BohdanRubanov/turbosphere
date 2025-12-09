@@ -1,31 +1,42 @@
-
 import { useState } from "react";
+import styles from "./product.module.css";
 
-import styles from "./product.module.css"
-import type { IProps } from "./types";
+interface IProduct {
+	name: string;
+	price: number;
+	image: string;
+}
 
-export function Product(props: IProps) {
-	const [count, setCount] = useState<number>(0);
+interface ProductProps {
+	product: IProduct;
+}
+
+export function Product(props: ProductProps) {
 	const { product } = props;
-
-	function addProduct() {
+	const [count, setCount] = useState<number>(1);
+	function incrementCount() {
 		setCount(count + 1);
 	}
-
-	function minusProduct() {
-		setCount(count - 1);
+	function decrementCount() {
+		if (count > 1) {
+			setCount(count - 1);
+		}
 	}
 	return (
 		<div className={styles.block}>
-			<img src={product.image} className = {styles.image} alt="" />
-			<p className={styles.title}>{product.title}</p>
-			<p className={styles.price}>{product.price}</p>
+			<img src={product.image} alt="No" className={styles.image} />
+			<p className={styles.title}>{product.name}</p>
+			<p className={styles.price}>${product.price}</p>
 			<div className={styles.counter}>
 				<p>Count: {count}</p>
-				<button className={styles.buttonIcon} type="button" onClick={addProduct}>+</button>
-				<button className={styles.buttonIcon} type="button" onClick={minusProduct}>-</button>
+				<button onClick={decrementCount} className={styles.buttonIcon}>
+					-
+				</button>
+				<button onClick={incrementCount} className={styles.buttonIcon}>
+					+
+				</button>
 			</div>
-			<button type="button" className={styles.buttonMore}>More</button>
+			<button className={styles.buttonMore}>More</button>
 		</div>
 	);
 }

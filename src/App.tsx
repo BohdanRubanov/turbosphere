@@ -1,18 +1,27 @@
-import { Header } from "./components/Header/header";
-import { Main } from "./components/Main/main";
-import { ProductList } from "./components/ProductList/product-list";
-import { Footer } from "./components/Footer/footer";
-import styles from "./App.module.css"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Layout } from "./components/Layout/layout";
+import { ProductPage } from "./pages/products/products-page";
+import { OneProductPage } from "./pages/products/one-product-page"
+import { HomePage } from "./pages/home/home-page";
 
 export function App() {
 
 	return (
-		<div className={styles.container}>
-			<Header></Header>
-			<Main>
-            	<ProductList />
-			</Main>
-			<Footer></Footer>
-		</div>
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<Layout/>}>
+
+					<Route path="/" element={<HomePage/>}/>
+					<Route path="/products" element={<ProductPage />}/>
+					<Route path="/product/:id" element={<OneProductPage />}/>
+						
+					
+				
+				</Route>
+
+				
+			</Routes>
+		
+		</BrowserRouter>
 	);
 }
