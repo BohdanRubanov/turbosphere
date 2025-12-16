@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Layout } from "./components/Layout/layout";
-import { ProductPage } from "./pages/products/products-page";
-import { OneProductPage } from "./pages/products/one-product-page"
-import { HomePage } from "./pages/home/home-page";
+import { Layout } from "./Layout/layout";
+import { ProductPage } from "../pages/products/products-page";
+import { OneProductPage } from "../pages/products/one-product-page"
+import { HomePage } from "../pages/home/home-page";
 
-export function App() {
+export function AppRouter() {
 
 	return (
 		<BrowserRouter>
@@ -14,12 +14,9 @@ export function App() {
 					<Route path="/" element={<HomePage/>}/>
 					<Route path="/products" element={<ProductPage />}/>
 					<Route path="/product/:id" element={<OneProductPage />}/>
-						
-					
-				
+
 				</Route>
 
-				
 			</Routes>
 		
 		</BrowserRouter>

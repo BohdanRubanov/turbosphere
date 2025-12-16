@@ -1,10 +1,5 @@
-import type { ReactNode } from "react"
 import styles from "./main.module.css"
-
-
-interface IMainProps {
-    children: ReactNode
-}
+import { IMainProps } from "./main.types"
 
 
 export function Main(props: IMainProps){

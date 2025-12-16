@@ -1,17 +1,8 @@
 import { useState } from "react";
 import styles from "./product.module.css";
+import { IProps } from "./product.types";
 
-interface IProduct {
-	name: string;
-	price: number;
-	image: string;
-}
-
-interface ProductProps {
-	product: IProduct;
-}
-
-export function Product(props: ProductProps) {
+export function Product(props: IProps) {
 	const { product } = props;
 	const [count, setCount] = useState<number>(1);
 	function incrementCount() {

@@ -6,7 +6,7 @@ export function HomePage(){
         <div className={styles.Main}>
             <h1 className={styles.titleMain}>TurboSphere: Performance at Your Pace.</h1>
             <div className={styles.mainDiv}>
-                 <div className={styles.descriptions}>
+                <div className={styles.descriptions}>
                 <div className={styles.text}>
                     <h1 className={styles.title}>Our Mascot is a Snail. Here's Why.</h1>
                     <p>We live in a world obsessed with speed. But true quality is born from deliberation.</p>

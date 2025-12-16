@@ -1,10 +1,8 @@
-import logoImage from "./../../assets/images/logo.png";
-import defaultAvatarImage from "./../../assets/images/UserAvatar.png";
+
 import styles from "./header.module.css";
-import { ReactComponent as SearchIcon } from "./../../assets/icons/search.svg";
-import { ReactComponent as MenuIcon } from "./../../assets/icons/button-icon.svg";
 import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
+import { ICONS, IMAGES } from "../../shared";
 
 export function Header() {
 	const isDesktop = useMediaQuery({ minWidth: 1025 });
@@ -16,12 +14,12 @@ export function Header() {
 		return (
 			<header className={styles.headerDesktop}>
 				<div className={styles.logoBlock}>
-					<img src={logoImage} alt="Logo" />
+					<img src={IMAGES.logo} alt="Logo" />
 				</div>
 
 				<div className={styles.actionBlock}>
 					<button type="button" className={styles.menuButton}>
-						<MenuIcon className={styles.menuButtonIcon}></MenuIcon>
+						<ICONS.ButtonIcon className={styles.menuButtonIcon} />
 						Categories
 					</button>
 					<div className={styles.searchBarBlock}>
@@ -30,16 +28,16 @@ export function Header() {
 							placeholder="Find products..."
 							className={styles.searchInput}
 						/>
-						<SearchIcon className={styles.searchIcon}></SearchIcon>
+						<ICONS.Search className={styles.searchIcon} />
 					</div>
 					<button type="button" className={styles.menuButton}>
-						<MenuIcon className={styles.menuButtonIcon}></MenuIcon>
+						<ICONS.ButtonIcon className={styles.menuButtonIcon} />
 						Cart
 					</button>
 				</div>
 				<div className={styles.profileBlock}>
 					<p>Username</p>
-					<img src={defaultAvatarImage} alt="Avatar" />
+					<img src={IMAGES.UserAvatar} alt="Avatar" />
 				</div>
 			</header>
 		);
@@ -47,14 +45,14 @@ export function Header() {
 	if (isTablet) {
 		return (
 			<header className={styles.headerTablet}>
-				<MenuIcon onClick={() => setIsSidebarOpen(true)}></MenuIcon>
+				<ICONS.ButtonIcon onClick={() => setIsSidebarOpen(true)} />
 				<div className={styles.searchBarTablet}>
 					<input
 						type="text"
 						placeholder="Find products..."
 						className={styles.searchInput}
 					/>
-					<SearchIcon className={styles.searchIcon}></SearchIcon>
+					<ICONS.ButtonIcon className={styles.searchIcon}/>
 				</div>
 				{isSidebarOpen && (
 					<div
@@ -69,7 +67,7 @@ export function Header() {
 							<li className={styles.logoItem}>
 								<img
 									className={styles.logoImage}
-									src={logoImage}
+									src={IMAGES.logo}
 									alt="Logo"
 								/>
 								<span>SnailStore</span>
@@ -77,7 +75,7 @@ export function Header() {
 
 							<li>
 								<button className={styles.menuButtonTablet}>
-									<MenuIcon
+									<ICONS.ButtonIcon
 										className={styles.menuButtonIcon}
 									/>
 									Categories
@@ -85,7 +83,7 @@ export function Header() {
 							</li>
 							<li>
 								<button className={styles.menuButtonTablet}>
-									<MenuIcon
+									<ICONS.ButtonIcon
 										className={styles.menuButtonIcon}
 									/>
 									Cart
@@ -93,7 +91,7 @@ export function Header() {
 							</li>
 
 							<li className={styles.profileItem}>
-								<img src={defaultAvatarImage} alt="Avatar" />
+								<img src={IMAGES.UserAvatar} alt="Avatar" />
 								<div>
 									<p style={{ margin: 0, fontWeight: 500 }}>
 										Username
