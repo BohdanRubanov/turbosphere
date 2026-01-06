@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IProduct } from "../shared";
+import type { IProduct } from "../shared";
 
 export function useProductById(productId: number){
     const [error, setError] = useState<string | null>(null)

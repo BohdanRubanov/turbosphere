@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IProduct } from "../shared";
+import type { IProduct } from "../shared";
 
 export function useProducts() {
 	const [products, setProducts] = useState<IProduct[]>([]);

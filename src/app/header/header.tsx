@@ -2,6 +2,7 @@ import styles from "./header.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ICONS } from "../../shared/icons";
 import { IMAGES } from "../../shared/images";
+import { Search } from "../../components/search";
 
 export function Header() {
 	const navigate = useNavigate();
@@ -24,14 +25,7 @@ export function Header() {
 					</button>
 				</Link>
 
-				<div className={styles.searchBlock}>
-					<input
-						placeholder="Find products..."
-						className={styles.searchBar}
-						type="text"
-					/>
-					<ICONS.SearchIcon className={styles.searchIcon} />
-				</div>
+				<Search/>
 				<Link to={"/cart"} className={styles.link}>
 					<button className={styles.actionButton}>
 						<ICONS.CartIcon />
