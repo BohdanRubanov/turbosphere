@@ -4,6 +4,8 @@ import homeImage from "../assets/images/home.png";
 import notFoundImage from "../assets/images/not-found.png";
 import catImage from "../assets/images/cat.png"
 
+
+
 export const IMAGES = {
 	logo: logoImage,
 	user: userImage,
