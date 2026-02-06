@@ -1,53 +1,88 @@
-.productCart {
-	display: flex;
-	gap: clamp(5px, 2vw, 10px);
-	padding: clamp(10px, 2vw, 20px);
-	width: 100%;
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+    min-height: 80vh;
+}
+
+.productCard {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    max-width: 1000px;
+    width: 100%;
+    align-items: flex-start;
 }
 
 .productImage {
-	width: 300px;
-	height: 300px;
-	border-radius: 8%;
-	object-fit: cover;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
-.productFullDescription {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	flex: 1;
-	gap: clamp(7.5px, 2vw, 15px);
+.productInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.productTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: #000;
 }
 
 .productDescription {
-	width: 100%;
-	text-align: center;
-	font-weight: 400;
-	font-size: clamp(20px, 2vw, 32px);
-	font-family: "Inter", sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #333;
+    margin: 0;
+    max-width: 600px; 
 }
 
 .productButtons {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
 }
 
-.productButton {
-	text-align: center;
-	padding: 10px 20px;
-	width: 250px;
-	height: 45px;
-	border-radius: 15px;
-	background-color: #faf0e6;
-	margin: 0 10px;
-	border: none;
-	font-size: 1rem;
+.productButtons button {
+    min-width: 160px;
+    height: 48px;
+    border-radius: 12px;
+    border: none;
+    background-color: #f7ede2;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
-.productTitle{
-	font-size: clamp(36px, 2vw, 44px);
-	font-family: "Inter", sans-serif;
+
+.productButtons button:hover {
+    background-color: #f2e3d5;
+    transform: translateY(-2px);
+}
+
+
+@media (max-width: 850px) {
+    .productCard {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .productImage {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+        aspect-ratio: 1/1;
+    }
+
+    .productButtons {
+        justify-content: center;
+    }
 }

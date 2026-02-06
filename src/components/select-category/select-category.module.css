@@ -1,16 +1,50 @@
 .selectCategory {
-	display: flex;
-	flex-direction: column;
-
-	gap: 10px;
-
-	font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    font-size: 18px;
+    color: #333;
 }
+
+.selectCategory p {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
 .labelSelectCategory {
-	display: flex;
-	gap: 5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    user-select: none;
 }
 
-.error {
-	color: red;
+.labelSelectCategory input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.labelSelectCategory input[type="radio"]:checked {
+    border-color: #1D1B20;
+}
+
+.labelSelectCategory input[type="radio"]:checked::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #1D1B20;
+    border-radius: 50%;
 }

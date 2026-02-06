@@ -1,78 +1,72 @@
-import { useNavigate } from "react-router-dom";
-import { CartContext, type CartItem } from "../../context/cart-context";
-import { Button, IMAGES, IProduct } from "../../shared";
-import styles from './product-in-cart.module.css'
 import { useContext } from "react";
-interface IProductInCart {
-	productInCart: CartItem;
+import styles from "./product-in-cart.module.css";
+import { CartContext, type CartItem } from "../../context/cart-context";
+import { Button } from "../../shared";
+import { Link } from "react-router-dom";
+
+interface ProductInCartProps {
+    productInCart: CartItem;
 }
 
-export function ProductInCart(props: IProductInCart) {
-	const { productInCart } = props;
-    const context = useContext(CartContext)
-	const navigate = useNavigate()
-    if (!context){
-        return null
-    }
-    
-    const {incrementCount, decrementCount, removeFromCart} = context
-    
-    function incrementCountFunc(){
-		incrementCount(productInCart.id)
-	}
+export function ProductInCart({ productInCart }: ProductInCartProps) {
+    const cartContext = useContext(CartContext);
+    if (!cartContext) return null;
 
-	function decrementCountFunc(){
-		decrementCount(productInCart.id)
-	}
+    const { incrementCount, decrementCount, removeFromCart } = cartContext;
 
+    return (
+        <div className={styles.cartItem}>
+            <img 
+                src={productInCart.image} 
+                alt={productInCart.name} 
+                className={styles.itemImage} 
+            />
+            
+            <div className={styles.itemContent}>
+                <div className={styles.textDetails}>
+                    <div className={styles.field}><span className={styles.label}>Name:</span> {productInCart.name}</div>
+                    <div className={styles.field}>
+                        <span className={styles.label}>Description:</span> 
+                        <span className={styles.descriptionText}>{productInCart.description || "No description"}</span>
+                    </div>
+                    <div className={styles.field}><span className={styles.label}>Category:</span> {productInCart.category?.name || "General"}</div>
+                    <div className={styles.field}><span className={styles.label}>Price:</span> {productInCart.price}$</div>
+                </div>
+                
+                <div className={styles.counterSection}>
+                    <p className={styles.countText}>Number of items: {productInCart.count}</p>
+                    <div className={styles.counterButtons}>
+                        <Button 
+                            variant="count-green" 
+                            className={styles.roundBtn}
+                            onClick={() => incrementCount(productInCart.id)}
+                        > + </Button>
+                        <Button 
+                            variant="count-red" 
+                            className={styles.roundBtn}
+                            onClick={() => decrementCount(productInCart.id)}
+                            disabled={productInCart.count === 0}
+                        > − </Button>
+                    </div>
+                </div>
+            </div>
 
-    function removeFromCartFunc(){
-		removeFromCart(productInCart.id)
-	}
-    
-	return (
-		<div className = {styles.productInCart}>
-            <img src={IMAGES.cat} className={styles.image} alt=""/>
-
-			<div className={styles.productDetails}>
-				<p className={`${styles.productName} ${styles.productInfo}`}>
-					<strong>Name: </strong>
-					{productInCart.name}
-				</p> 
-
-				<p className={`${styles.productDescription} ${styles.productInfo}`}>
-					<strong>Description: </strong>
-					{productInCart.description}
-				</p>
-
-				<p className={`${styles.productCategory} ${styles.productInfo}`}>
-					<strong>Category: </strong>
-					{productInCart.category.name}
-				</p>
-
-				<p className={`${styles.productPrice} ${styles.productInfo}`}> 
-					<strong>Price: </strong>
-					{productInCart.price}
-				</p>
-
-				<div className={`${styles.productCount} ${styles.productInfo}`}>
-					<p>
-						<strong>Number of items: </strong>
-						{productInCart.count}
-					</p>
-				</div>
-
-				<div className={styles.productActions}>
-                    <Button variant='count-red' onClick={incrementCountFunc}>+</Button>
-                    <Button variant='count-green' onClick={decrementCountFunc}>–</Button>
-
-				</div>
-			</div>
-			<div className={styles.productSecondActions}>
-                <Button variant="buy">Buy</Button>
-                <Button variant="buy" onClick={()=>{navigate(`/product/${productInCart.id}`)}}>Go to</Button>
-                <Button variant="delete" onClick={removeFromCartFunc}>Delete</Button>
-			</div>
-		</div>
-	);
+            <div className={styles.itemActions}>
+                <Button variant="buy" className={styles.actionBtn}>Buy</Button>
+                <Link 
+					to={`/product/${productInCart.id}`} 
+					className={`${styles.actionBtn} ${styles.linkAsButton}`}
+				>
+					Go to
+				</Link>
+                <Button 
+                    variant="buy" 
+                    className={`${styles.actionBtn} ${styles.deleteText}`}
+                    onClick={() => removeFromCart(productInCart.id)}
+                >
+                    Delete
+                </Button>
+            </div>
+        </div>
+    );
 }

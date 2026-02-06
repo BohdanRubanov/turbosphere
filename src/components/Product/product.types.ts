@@ -1,6 +1,6 @@
-import type { IProduct } from "../../shared";
+import { CartItem } from "../../context/cart-context";
 
 
-export interface IProductProps {
-	product: IProduct;
+export interface ProductProps {
+    productInCart: CartItem;
 }
