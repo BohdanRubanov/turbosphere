@@ -69,19 +69,11 @@ export function SignUp() {
                 <label htmlFor="password" className={styles.inputLabel}>
                     Password:
                     <input type="password" className={styles.inputForm} {...register('password', {
-                        required: {
-                            value: true,
-                            message: "This field is required"
-                        },
-                        minLength: {
-                            value: 5,
-                            message: "Password length must be more than 5 symbols"
-                        },
+                        required: "This field is required",
+                        minLength: { value: 5, message: "Min length is 5 symbols" },
                         validate: (value) => {
-                            if (value.includes("!") || value.includes(".") || value.includes("*")){
-                                return "Password can't contain any extra symbols"
-                            } else if (typeof value !== 'string') {
-                                return "Password must contain only letters or numbers"
+                            if (!/^[a-zA-Z0-9]+$/.test(value)) {
+                                return "Only letters and numbers allowed";
                             }
                         }
                     })}
@@ -92,21 +84,9 @@ export function SignUp() {
                 <label htmlFor="avatar" className={styles.inputLabel}>
                     Avatar:
                     <input type="text" className={styles.inputForm} {...register('avatar', {
-                        required: {
-                            value: true,
-                            message: "This field is required"
-                        },
-                        minLength: {
-                            value: 5,
-                            message: "Password length must be more than 5 symbols"
-                        },
-                        validate: (value) => {
-                            if (!value.includes("https://") && !value.includes("http://") && !value.includes("://")){
-                                return "Avatar must be a valid url"
-                            } else if (typeof value !== 'string') {
-                                return "Url must be string"
-                            }
-                        }
+                        required: "This field is required",
+                        validate: (value) => 
+                            value.startsWith("http") || "Must be a valid URL (starting with http)"
                     })}
                     />
                     {avatarError && <p className={styles.error}>{avatarError}</p>}

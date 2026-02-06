@@ -9,6 +9,8 @@ export function SelectCategory({
 }: SelectCategoryProps) {
 	const {categories} = useCategories()
 
+	
+
 	return (
 		<div className={styles.selectCategory}>
 			<p>Select category:</p>

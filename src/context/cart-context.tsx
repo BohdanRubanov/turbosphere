@@ -1,8 +1,8 @@
-import  { createContext, useState, type ReactNode } from "react";
+import { createContext, useState, type ReactNode } from "react";
 import type { IProduct } from "../shared";
 
-export interface CartItem extends IProduct{
-    count: number
+export interface CartItem extends IProduct {
+    count: number;
 }
 
 interface ICartContext {
@@ -15,10 +15,10 @@ interface ICartContext {
     removeAll: () => void;
 }
 
-export const CartContext = createContext<ICartContext | null>(null)
+export const CartContext = createContext<ICartContext | null>(null);
 
 interface CartContextProviderProps {
-    children: ReactNode
+    children: ReactNode;
 }
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
@@ -28,60 +28,46 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         const isInCart = items.findIndex((cartItem) => cartItem.id === item.id);
 
         if (isInCart !== -1) {
-            const itemInCart = items.at(isInCart);
-            if (!itemInCart) return;
-            incrementCount(itemInCart.id);
+            incrementCount(item.id);
         } else {
-            const newItems = [...items, item];
+            const newItems = [...items, { ...item, count: item.count > 0 ? item.count : 1 }];
             setItems(newItems);
         }
     }
 
     function removeFromCart(id: number) {
-        const newItems = items.filter((item) => {
-            return item.id !== id;
-        });
-        setItems(newItems);
+        setItems(prev => prev.filter((item) => item.id !== id));
     }
 
     function getTotalPrice(): number {
-        const totalPrice = items.reduce((sum, currentItem) => {
-            const itemTotal = currentItem.price * currentItem.count;
-            return sum + itemTotal;
-        }, 0);
-        return totalPrice;
+        return items.reduce((sum, currentItem) => sum + (currentItem.price * currentItem.count), 0);
     }
 
     function incrementCount(id: number) {
-        const newItems = items.map((item) => {
+        setItems(prev => prev.map((item) => {
             if (item.id === id) {
                 return { ...item, count: item.count + 1 };
             }
             return item;
-        });
-        setItems(newItems);
-        console.log(newItems)
+        }));
     }
+
     function decrementCount(id: number) {
-        const item = items.find(item => item.id === id)
-        if (item && item.count - 1 === 0) {
-            removeFromCart(id)
-            return
-        }
-        const newItems = items.map((item) => {
+        setItems(prev => prev.map((item) => {
             if (item.id === id) {
-                return { ...item, count: item.count - 1 };
+                const newCount = item.count - 1;
+                return { ...item, count: newCount >= 0 ? newCount : 0 };
             }
             return item;
-        });
-        setItems(newItems);
+        }));
     }
+
     function removeAll() {
         setItems([]);
     }
 
     return (
-        <CartContext
+        <CartContext.Provider
             value={{
                 items,
                 addToCart,
@@ -93,6 +79,6 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
             }}
         >
             {children}
-        </CartContext>
+        </CartContext.Provider>
     );
 }

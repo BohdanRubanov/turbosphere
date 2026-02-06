@@ -38,82 +38,109 @@ interface UserContextProviderProps {
     children: ReactNode;
 }
 
+
 export function UserContextProvider(props: UserContextProviderProps) {
     const { children } = props;
 
     const [token, setToken] = useState<string>("");
     const [user, setUser] = useState<IUser | null>(null);
 
+    async function handleResponse(response: Response) {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            return await response.json();
+        }
+        const text = await response.text();
+        throw new Error(text || "Server error");
+    }
+
     async function registration(userData: RegisterCredentials) {
         try {
             const response = await fetch("http://localhost:8000/register", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userData),
             });
-            const result = await response.json();
-            if (response.status === 409) {
-                return result.message;
+
+            const result = await handleResponse(response);
+
+            if (!response.ok) {
+                return result.message || "Registration failed";
             }
+
             setToken(result.token);
             localStorage.setItem("token", result.token);
-        } catch {
-            return "Bad backend";
+        } catch (error) {
+            console.error(error);
+            return "Registration error";
         }
     }
 
     async function login(userData: LoginCredentials) {
         try {
             const response = await fetch("http://localhost:8000/login", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userData),
             });
-            const result = await response.json();
-            if (response.status === 422 || response.status === 404) {
-                return result.message;
+
+            const result = await handleResponse(response);
+
+            if (!response.ok) {
+                return result.message || "Login failed";
             }
+
             setToken(result.token);
             localStorage.setItem("token", result.token);
-        } catch {
-            return "Network error";
+        } catch (error) {
+            console.error(error);
+            return "Login error";
         }
     }
 
     async function me() {
+        if (!token) return;
         try {
             const response = await fetch("http://localhost:8000/me", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            const result = await response.json();
-            if (response.status === 404) {
-                return result.message;
+
+            if (response.status === 401) {
+                logout();
+                return;
             }
+
+            const result = await handleResponse(response);
             setUser(result);
-        } catch {
-            return "Network error";
+        } catch (error) {
+            console.error("Fetch me error:", error);
         }
     }
-    useEffect(() => {
-        if (!token) return;
-        me();
-    }, [token]);
+
+    const logout = () => {
+        setToken("");
+        setUser(null);
+        localStorage.removeItem("token");
+    };
 
     useEffect(() => {
         const localStorageToken = localStorage.getItem("token");
-        if (!localStorageToken) return;
-        setToken(localStorageToken);
+        if (localStorageToken) {
+            setToken(localStorageToken);
+        }
     }, []);
 
+    useEffect(() => {
+        if (token) {
+            me();
+        }
+    }, [token]);
+
     return (
-        <UserContext value={{ token, user, registration, login }}>
+        <UserContext.Provider value={{ token, user, registration, login }}>
             {children}
-        </UserContext>
+        </UserContext.Provider>
     );
 }

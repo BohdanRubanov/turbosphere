@@ -1,52 +1,116 @@
-.cart {
-	display: flex;
-	gap: 20px;
-	align-items: flex-start;
-	padding: 16px;
-	font-family: Arial, Helvetica, sans-serif;
-	color: #000;
-	max-width: 900px;
+.cartItem {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    padding: 25px 0;
+    border-bottom: 1px solid #333;
+    width: 100%;
+    align-items: flex-start;
 }
 
-.imageWrapper {
-	width: 150px;
-	height: 150px;
-}
-
-.image {
-	width: 230px;
-	height: 230px;
+.itemImage {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
     border-radius: 4px;
+    flex-shrink: 0;
 }
 
-.productDetails {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	flex: 1;
-	gap: 10px;
+.itemContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.productActions {
-	display: flex;
-	flex-direction: row;
-	gap: 15px;
-	align-items: center;
+.textDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.productSecondActions {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
-	align-items: flex-start;
+.label {
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
 }
-.productInCart{
-	display: flex;
-	gap: clamp(10px,2vw,20px);	
-	padding: clamp(5px, 2vw, 10px);
-	border-bottom: 1px black solid;
+
+.field {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #000;
 }
-.productInfo{
-	font-size: clamp(16px, 2vw, 20px);
-	font-weight: 400;
+
+.descriptionText {
+    display: inline-block;
+    max-width: 600px;
+    vertical-align: top;
+}
+
+.counterSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.countText {
+    margin: 0;
+    font-weight: 700;
+}
+
+.counterButtons {
+    display: flex;
+    gap: 12px;
+}
+
+.roundBtn {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem !important;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+:global(.button-count-green) { background-color: #90EE90 !important; color: #000; }
+:global(.button-count-red) { background-color: #FFB6B6 !important; color: #000; }
+
+.itemActions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 160px;
+    margin-left: auto;
+}
+
+.actionBtn {
+    width: 100%;
+    height: 45px;
+    background-color: #fdf2e9 !important;
+    border-radius: 15px !important;
+    border: none !important;
+    font-size: 1.2rem !important;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+}
+
+.deleteText {
+    color: #d32f2f !important;
+}
+
+.linkAsButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000;
+    box-sizing: border-box;
+}
+
+.linkAsButton:hover {
+    background-color: #fcece0 !important;
 }

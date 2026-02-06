@@ -13,7 +13,7 @@ export function AppRoutes() {
 				<Route path="/" element={<Layout />}>
 					<Route path="/" element={<HomePage />} />
 					<Route path="/products" element={<ProductsPage />} />
-					<Route path= "/product/:id" element= {<OneProductPage />}/>
+					<Route path="/product/:id" element= {<OneProductPage />}/>
 					<Route path="/cart" element= {<CartPage/>}></Route>
 					<Route path="/sign-in" element= {<SignIn/>}></Route>
 					<Route path="/sign-up/" element= {<SignUp/>}></Route>

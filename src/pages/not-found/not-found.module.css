@@ -1,0 +1,60 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Вираховуємо висоту, щоб контент був по центру екрана */
+    min-height: calc(100vh - 120px); 
+    width: 100%;
+    padding: 20px; /* Зменшив паддінг для мобілок */
+    box-sizing: border-box;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%; /* Дозволяємо контенту займати всю доступну ширину */
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.imageBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.imageBox:hover {
+    transform: scale(1.02);
+}
+
+.image {
+    width: 100%;            
+    max-width: 680px;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 24px;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+}
