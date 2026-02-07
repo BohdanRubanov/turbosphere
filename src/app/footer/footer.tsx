@@ -3,7 +3,7 @@ import styles from "./footer.module.css";
 export function Footer() {
 	return (
 		<footer className={styles.footer}>
-			<img src={IMAGES.logo} alt="No" />
+			<img src={IMAGES.logo} alt="Yes" />
 			<p>
 				© 2024 TurboSphere. All rights reserved
 				<br />
